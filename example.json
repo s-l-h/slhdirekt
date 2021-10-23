@@ -1,0 +1,68 @@
+{
+  "orders" : [ {
+    "infoInvoice" : "Rechnung zwei mal",
+    "cashOnDelivery" : 249.99,
+    "unloadingCrane" : false,
+    "unloadingForklift" : false,
+    "unloadingLiftgate" : false,
+    "advice" : "030184410",
+    "adviceType" : "TELEPHONE_CALL",
+    "lines" : [ {
+      "packageType" : "Europalette",
+      "weight" : 200,
+      "length" : 100,
+      "width" : 50,
+      "height" : 10,
+      "contents" : [ {
+        "quantity" : 3,
+        "articleDescription" : "Artikel A",
+        "articleNumber" : "A304550"
+      }, {
+        "quantity" : 1,
+        "articleDescription" : "Artikel B",
+        "articleNumber" : "B420000"
+      } ]
+    }, {
+      "packageType" : "Einwegpalette",
+      "weight" : 55,
+      "length" : 120,
+      "width" : 80,
+      "height" : 44
+    } ],
+    "addressee" : {
+      "name1" : "Bundesministerium für Gesundheit (BMG)",
+      "name2" : "Referat I \"Internet, Soziale Netzwerke\"",
+      "street" : "Rochusstr. 1",
+      "country" : "DE",
+      "zip" : "53123",
+      "city" : "Bonn"
+    },
+    "deliveryToPrivate" : false
+  }, {
+    "baseService" : "Express",
+    "unloadingCrane" : false,
+    "unloadingForklift" : false,
+    "unloadingLiftgate" : false,
+    "lines" : [ {
+      "weight" : 150
+    }, {
+      "weight" : 20
+    } ],
+    "addressee" : {
+      "name1" : "Axel Springer SE",
+      "street" : "Axel-Springer-Straße 65",
+      "country" : "DE",
+      "zip" : "10888",
+      "city" : "Berlin"
+    },
+    "placeOfLoading" : {
+      "name1" : "Beladestelle 1",
+      "street" : "Logistikpark 3",
+      "country" : "DE",
+      "zip" : "0815",
+      "city" : "Hintertupfingen"
+    },
+    "billingAddress" : { },
+    "deliveryToPrivate" : false
+  } ]
+}

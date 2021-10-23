@@ -1,0 +1,886 @@
+{
+  "paths": {
+    "/auth": {
+      "put": {
+        "operationId": "auth",
+        "tags": [
+          "auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "401": {
+            "description": "unauthorized"
+          },
+          "400": {
+            "description": "error"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "credentials": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/orders/{uuid}/status": {
+      "get": {
+        "operationId": "status",
+        "tags": [
+          "order"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "uuid",
+            "type": "string",
+            "format": "/[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}/",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "X-Auth-Token",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/Event"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "401": {
+            "description": "unauthorized"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "400": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "/orders/{uuid}/labels": {
+      "get": {
+        "operationId": "labels",
+        "tags": [
+          "order"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "uuid",
+            "type": "string",
+            "format": "/[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}/",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "X-Auth-Token",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "401": {
+            "description": "unauthorized"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "400": {
+            "description": "error"
+          }
+        },
+        "produces": [
+          "application/pdf"
+        ]
+      }
+    },
+    "/orders/{uuid}/labels/{nve}": {
+      "get": {
+        "operationId": "label",
+        "tags": [
+          "order"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "uuid",
+            "type": "string",
+            "format": "/[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}/",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "nve",
+            "type": "string",
+            "format": "/00[0-9]{18}/",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "X-Auth-Token",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "401": {
+            "description": "unauthorized"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "400": {
+            "description": "error"
+          }
+        },
+        "produces": [
+          "application/pdf"
+        ]
+      }
+    },
+    "/orders/create": {
+      "post": {
+        "operationId": "create",
+        "tags": [
+          "order"
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/Order"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "401": {
+            "description": "unauthorized"
+          },
+          "400": {
+            "description": "error"
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Order"
+                  }
+                }
+              }
+            },
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "X-Auth-Token",
+            "type": "string",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/orders/upload": {
+      "post": {
+        "operationId": "upload",
+        "tags": [
+          "order"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "order_file",
+            "type": "file",
+            "required": true,
+            "description": "The file to upload"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "401": {
+            "description": "unauthorized"
+          },
+          "400": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "/orders/{uuid}": {
+      "get": {
+        "operationId": "get",
+        "tags": [
+          "order"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "uuid",
+            "type": "string",
+            "format": "/[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}/",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "X-Auth-Token",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/definitions/Order"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "401": {
+            "description": "unauthorized"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "400": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "/orders/{uuid}/publish": {
+      "post": {
+        "operationId": "publish",
+        "tags": [
+          "order"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "uuid",
+            "type": "string",
+            "format": "/[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}/",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "X-Auth-Token",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/definitions/Order"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "401": {
+            "description": "unauthorized"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "400": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "/orders/publish": {
+      "post": {
+        "operationId": "publishOrders",
+        "tags": [
+          "order"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "/[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}/"
+                  }
+                }
+              }
+            },
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "X-Auth-Token",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Response"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/Order"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "401": {
+            "description": "unauthorized"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "400": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "/orders/": {
+      "get": {
+        "operationId": "list",
+        "tags": [
+          "order"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "from",
+            "type": "string",
+            "pattern": "/([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "to",
+            "type": "string",
+            "pattern": "/([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/",
+            "required": false
+          },
+          {
+            "in": "header",
+            "name": "X-Auth-Token",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Order"
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized"
+          },
+          "400": {
+            "description": "error"
+          }
+        }
+      }
+    }
+  },
+  "produces": [
+    "application/json",
+    "application/pdf"
+  ],
+  "definitions": {
+    "Response": {
+      "description": "Basic api response",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "ok",
+            "error"
+          ]
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "page_size": {
+          "type": "number",
+          "minimum": 0
+        },
+        "auth_token": {
+          "type": "string"
+        }
+      }
+    },
+    "Order": {
+      "properties": {
+        "shippingDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "baseService": {
+          "type": "string",
+          "enum": [
+            "2",
+            "O"
+          ],
+          "default": "2"
+        },
+        "reference": {
+          "type": "string",
+          "maxLength": 15
+        },
+        "infoInvoice": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "infoDelRunSheet": {
+          "type": "string",
+          "maxLength": 35
+        },
+        "cashOnDelivery": {
+          "type": "number",
+          "maximum": 10000,
+          "minimum": 0
+        },
+        "unloadingOption": {
+          "type": "string",
+          "enum": [
+            "CRANE",
+            "FORKLIFT",
+            "LIFTGATE"
+          ]
+        },
+        "fixedDeliveryDate": {
+          "type": "string",
+          "format": "/([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/"
+        },
+        "deliveryUntilDate": {
+          "type": "string",
+          "format": "/([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/"
+        },
+        "transportInsuranceValue": {
+          "type": "number",
+          "maximum": 50000,
+          "minimum": 0
+        },
+        "transportInsuranceHiddenDamage": {
+          "type": "boolean",
+          "default": false
+        },
+        "advice": {
+          "type": "string"
+        },
+        "adviceType": {
+          "type": "string",
+          "enum": [
+            "NO_ADVICE",
+            "TELEPHONE_CALL",
+            "SMS",
+            "EMAIL",
+            "TIMESLOT_BOOKING"
+          ]
+        },
+        "terms": {
+          "type": "string",
+          "enum": [
+            "UNFREI",
+            "FREI_HAUS"
+          ]
+        },
+        "loadingTimeFrom": {
+          "type": "string",
+          "pattern": "/([0-9]{2}):([0-9]{2})/"
+        },
+        "loadingTimeTo": {
+          "type": "string",
+          "pattern": "/([0-9]{2}):([0-9]{2})/"
+        },
+        "lines": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "nve": {
+                "type": "string",
+                "format": "/(00[0-9]{18})|([0-9]{10})/",
+                "readOnly": true
+              },
+              "reference": {
+                "type": "string"
+              },
+              "packageType": {
+                "type": "string",
+                "enum": [
+                  "Europalette",
+                  "Gitterbox",
+                  "Einwegpalette",
+                  "Karton",
+                  "Sonstiges"
+                ],
+                "default": "Sonstiges"
+              },
+              "weight": {
+                "type": "integer",
+                "format": "int32",
+                "maximum": 26000,
+                "minimum": 0
+              },
+              "length": {
+                "type": "integer",
+                "format": "int32",
+                "maximum": 1460,
+                "minimum": 0
+              },
+              "width": {
+                "type": "integer",
+                "format": "int32",
+                "maximum": 255,
+                "minimum": 0
+              },
+              "height": {
+                "type": "integer",
+                "format": "int32",
+                "maximum": 400,
+                "minimum": 0
+              },
+              "contents": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "quantity": {
+                      "type": "integer",
+                      "format": "int32",
+                      "minimum": 1
+                    },
+                    "articleDescription": {
+                      "type": "string"
+                    },
+                    "articleNumber": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "addressee": {
+          "$ref": "#/definitions/Address"
+        },
+        "addressor": {
+          "description": "divergent addressor info",
+          "$ref": "#/definitions/Address"
+        },
+        "placeOfLoading": {
+          "description": "divergent place of loading info",
+          "$ref": "#/definitions/Address"
+        },
+        "deliveryToPrivate": {
+          "type": "boolean",
+          "default": true
+        },
+        "dangerousGoods": {
+          "type": "array",
+          "items": {}
+        },
+        "documents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "POD"
+                ]
+              }
+            }
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "REGISTERED",
+            "PLACED",
+            "LABEL_PRINTED",
+            "PENDING",
+            "IN_DELIVERY",
+            "ARCHIVED"
+          ]
+        },
+        "uuid": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "addressee",
+        "lines"
+      ]
+    },
+    "Address": {
+      "properties": {
+        "name1": {
+          "type": "string"
+        },
+        "name2": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string",
+          "enum": [
+            "DE",
+            "AT",
+            "BE",
+            "BG",
+            "CH",
+            "CZ",
+            "DK",
+            "ES",
+            "FR",
+            "FI",
+            "GB",
+            "HU",
+            "HR",
+            "IT",
+            "IE",
+            "LU",
+            "NL",
+            "PL",
+            "PT",
+            "RO",
+            "SE",
+            "SK",
+            "SI",
+            "EE",
+            "LI",
+            "LT",
+            "LV",
+            "NO"
+          ]
+        },
+        "zip": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "contact": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name1",
+        "street",
+        "zip",
+        "city",
+        "country"
+      ]
+    },
+    "Event": {
+      "properties": {
+        "timestamp": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "DELIVERED",
+            "IN_DELIVERY",
+            "DELIVERY_FAILED",
+            "HUB_IN",
+            "HUB_OUT",
+            "HUB_SCAN",
+            "DEPOT_IN",
+            "DELIVERED_CANCELLATION",
+            "DELIVERY_DATE_AGREED",
+            "DELIVERY_PLANNED",
+            "DEPOT_SCAN"
+          ]
+        },
+        "state": {
+          "type": "string"
+        },
+        "exception": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "SIGNATURE_REFUSED",
+            "ACCEPTANCE_REFUSED",
+            "ADDRESSEE_NOT_MET",
+            "ADDRESSEE_CLOSED",
+            "RETURN_ORDERED",
+            "PARCEL_REDUNDANT",
+            "PARCEL_MISSING",
+            "ADDRESSEE_NOT_REACHED",
+            "DELIVERY_CAPACITY_SHORTAGE",
+            "ADDRESSEE_SELF_COLLECTOR",
+            "SHIPMENT_INCOMPLETE"
+          ]
+        },
+        "additionalInfo": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "swagger": "2.0",
+  "info": {
+    "description": "SLH REST Api Description",
+    "title": "slhdirekt API",
+    "version": "0.2-Beta"
+  },
+  "host": "api.slhdirekt.de",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "auth"
+    },
+    {
+      "name": "order"
+    }
+  ]
+}

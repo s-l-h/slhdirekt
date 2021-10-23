@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="xmlOrders" type="xmlOrders"/>
+
+  <xs:complexType name="xmlOrders">
+    <xs:sequence>
+      <xs:element name="order" type="order"  minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="order">
+    <xs:sequence>
+      <xs:element name="shippingDate" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="reference" type="xs:string" minOccurs="0"/>
+      <xs:element name="baseService" type="tariffType" default="2" minOccurs="0"/>
+      <xs:element name="remarks" type="xs:string" minOccurs="0"/>
+      <xs:element name="infoDelRunSheet" type="xs:string" minOccurs="0"/>
+      <xs:element name="infoInvoice" type="xs:string" minOccurs="0"/>
+      <xs:element name="cashOnDelivery" type="xs:double" minOccurs="0"/>
+      <xs:element name="transportInsuranceValue" type="xs:int" minOccurs="0"/>
+      <xs:element name="transportInsuranceHiddenDamage" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="unloadingCrane" type="xs:boolean"/>
+      <xs:element name="unloadingForklift" type="xs:boolean"/>
+      <xs:element name="unloadingLiftgate" type="xs:boolean"/>
+      <xs:element name="advice" type="xs:string" default="NONE" minOccurs="0"/>
+      <xs:element name="adviceType" type="adviceType" minOccurs="0"/>
+      <xs:element name="loadingTimeFrom" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="loadingTimeTo" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="orderLine" type="orderLine"  minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="addressee" type="address"/>
+      <xs:element name="addressor" type="address" minOccurs="0"/>
+      <xs:element name="placeOfLoading" type="address" minOccurs="0"/>
+      <xs:element name="billingAddress" type="address" minOccurs="0"/>
+      <xs:element name="deliveryToPrivate" type="xs:boolean" default="false" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="orderLine">
+    <xs:sequence>
+      <xs:element name="nve" type="xs:string" minOccurs="0"/>
+      <xs:element name="packageType" type="packageType" minOccurs="0"/>
+      <xs:element name="reference" type="xs:string" minOccurs="0"/>
+      <xs:element name="weight" type="xs:int" minOccurs="0"/>
+      <xs:element name="length" type="xs:int" minOccurs="0"/>
+      <xs:element name="width" type="xs:int" minOccurs="0"/>
+      <xs:element name="height" type="xs:int" minOccurs="0"/>
+      <xs:element name="customerAppend1" type="xs:string" minOccurs="0"/>
+      <xs:element name="customerAppend2" type="xs:string" minOccurs="0"/>
+      <xs:element name="customerAppend3" type="xs:string" minOccurs="0"/>
+      <xs:element name="customerAppend4" type="xs:string" minOccurs="0"/>
+      <xs:element name="customerAppend5" type="xs:string" minOccurs="0"/>
+      <xs:element name="content" type="orderLineContent" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="orderLineContent">
+    <xs:sequence>
+      <xs:element name="quantity" type="xs:int" minOccurs="0"/>
+      <xs:element name="articleDescription" type="xs:string" minOccurs="0"/>
+      <xs:element name="articleNumber" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="address">
+    <xs:sequence>
+      <xs:element name="name1" type="xs:string"/>
+      <xs:element name="name2" type="xs:string" minOccurs="0"/>
+      <xs:element name="street" type="xs:string"/>
+      <xs:element name="country" default="DE" type="xs:string"/>
+      <xs:element name="zip" type="xs:string" />
+      <xs:element name="city" type="xs:string" />
+
+      <xs:element name="contact" type="xs:string" minOccurs="0"/>
+      <xs:element name="email" type="xs:string" minOccurs="0"/>
+      <xs:element name="phoneNumber" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="tariffType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="2"/>
+      <xs:enumeration value="O"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="adviceType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NO_ADVICE"/>
+      <xs:enumeration value="TELEPHONE_CALL"/>
+      <xs:enumeration value="SMS"/>
+      <xs:enumeration value="EMAIL"/>
+      <xs:enumeration value="TIMESLOT_BOOKING"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="packageType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Europalette"/>
+      <xs:enumeration value="Gitterbox"/>
+      <xs:enumeration value="Karton"/>
+      <xs:enumeration value="Einwegpalette"/>
+      <xs:enumeration value="Sonstiges"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="countryCode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DE"/>
+      <xs:enumeration value="AT"/>
+      <xs:enumeration value="BE"/>
+      <xs:enumeration value="BG"/>
+      <xs:enumeration value="CH"/>
+      <xs:enumeration value="CZ"/>
+      <xs:enumeration value="DK"/>
+      <xs:enumeration value="ES"/>
+      <xs:enumeration value="FR"/>
+      <xs:enumeration value="FI"/>
+      <xs:enumeration value="GB"/>
+      <xs:enumeration value="HU"/>
+      <xs:enumeration value="HR"/>
+      <xs:enumeration value="IT"/>
+      <xs:enumeration value="IE"/>
+      <xs:enumeration value="LU"/>
+      <xs:enumeration value="NL"/>
+      <xs:enumeration value="PL"/>
+      <xs:enumeration value="PT"/>
+      <xs:enumeration value="RO"/>
+      <xs:enumeration value="SE"/>
+      <xs:enumeration value="SK"/>
+      <xs:enumeration value="SI"/>
+      <xs:enumeration value="EE"/>
+      <xs:enumeration value="LI"/>
+      <xs:enumeration value="LT"/>
+      <xs:enumeration value="LV"/>
+      <xs:enumeration value="NO"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>
+

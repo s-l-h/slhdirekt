@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xmlOrders>
+    <order>
+        <infoInvoice>Rechnung zwei mal</infoInvoice>
+        <cashOnDelivery>249.99</cashOnDelivery>
+        <unloadingCrane>false</unloadingCrane>
+        <unloadingForklift>false</unloadingForklift>
+        <unloadingLiftgate>false</unloadingLiftgate>
+        <advice>030184410</advice>
+        <adviceType>TELEPHONE_CALL</adviceType>
+        <orderLine>
+            <packageType>Europalette</packageType>
+            <weight>200</weight>
+            <length>100</length>
+            <width>50</width>
+            <height>10</height>
+            <content>
+                <quantity>3</quantity>
+                <articleDescription>Artikel A</articleDescription>
+                <articleNumber>A304550</articleNumber>
+            </content>
+            <content>
+                <quantity>1</quantity>
+                <articleDescription>Artikel B</articleDescription>
+                <articleNumber>B420000</articleNumber>
+            </content>
+        </orderLine>
+        <orderLine>
+            <packageType>Einwegpalette</packageType>
+            <weight>55</weight>
+            <length>120</length>
+            <width>80</width>
+            <height>44</height>
+        </orderLine>
+        <addressee>
+            <name1>Bundesministerium für Gesundheit (BMG)</name1>
+            <name2>Referat I "Internet, Soziale Netzwerke"</name2>
+            <street>Rochusstr. 1</street>
+            <country>DE</country>
+            <zip>53123</zip>
+            <city>Bonn</city>
+        </addressee>
+        <deliveryToPrivate>false</deliveryToPrivate>
+    </order>
+    <order>
+        <baseService>Express</baseService>
+        <unloadingCrane>false</unloadingCrane>
+        <unloadingForklift>false</unloadingForklift>
+        <unloadingLiftgate>false</unloadingLiftgate>
+        <orderLine>
+            <weight>150</weight>
+        </orderLine>
+        <orderLine>
+            <weight>20</weight>
+        </orderLine>
+        <addressee>
+            <name1>Axel Springer SE</name1>
+            <street>Axel-Springer-Straße 65</street>
+            <country>DE</country>
+            <zip>10888</zip>
+            <city>Berlin</city>
+        </addressee>
+        <placeOfLoading>
+            <name1>Beladestelle 1</name1>
+            <street>Logistikpark 3</street>
+            <country>DE</country>
+            <zip>0815</zip>
+            <city>Hintertupfingen</city>
+        </placeOfLoading>
+        <billingAddress/>
+        <deliveryToPrivate>false</deliveryToPrivate>
+    </order>
+</xmlOrders>
