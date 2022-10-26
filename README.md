@@ -66,11 +66,17 @@ Auth Response:
 
 ...
 
-### Fortras 128
+### EDI
+
+#### EDIFACT/IFTMIN
 
 ...
 
-### Fortras 512
+#### Fortras 128
+
+...
+
+#### Fortras 512
 ...
 
 ### CSV
