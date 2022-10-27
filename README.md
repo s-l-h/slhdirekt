@@ -69,7 +69,7 @@ Auth Response:
 ### EDI
 
 #### EDIFACT/IFTMIN
-
+ - siehe [GS1 Germany Anwendungsempfehlung zu EANCOM® 2002](https://www.publikationen.gs1-germany.de/Complete/eancom_v9.2/index.html)
 ...
 
 #### Fortras 128
