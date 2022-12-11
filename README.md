@@ -4,9 +4,11 @@ slhdirekt Schnittstellenbeschreibung & Beispiele
 
 ## REST API
 
-#### Die aktuellste Version finden sie hier:
+#### Die aktuellste Version finden Sie hier:
 
-https://slhdirekt.de/assets/swagger.json
+https://slhdirekt.de/docs
+
+( https://slhdirekt.de/assets/swagger.json) 
 
 
 #### Wer oder was ist swagger?
@@ -55,28 +57,33 @@ Auth Response:
 - halb-/vollautomatischer Import durch Anbindung von bestehenden (S)FTP(S) Strukturen, sowie Bereitstellung derjenigen bei Bedarf
 - manueller Upload der Datei im eingestellten Format via Portal
 
-### XML Format
+## Formate
+
+### JSON
+
+- siehe https://slhdirekt.de/assets/swagger.json
+
+- Alternative Schemata: auf Anfrage
+
+### XML
 
 - [SLH Schema](Transportauftrag_slhdirekt.xsd):
    - [Beispiel](example.xml)
 
-
-- Alternative Schemata:
-  - auf Anfrage
-
-...
+- Alternative Schemata: auf Anfrage
 
 ### EDI
 
 #### EDIFACT/IFTMIN
- - siehe [GS1 Germany Anwendungsempfehlung zu EANCOM® 2002](https://www.publikationen.gs1-germany.de/Complete/eancom_v9.2/index.html)
-...
+
+- siehe [GS1 Germany Anwendungsempfehlung zu EANCOM® 2002](https://www.publikationen.gs1-germany.de/Complete/eancom_v9.2/index.html)
 
 #### Fortras 128
-
+Beschreibung folgt
 ...
 
 #### Fortras 512
+Beschreibung folgt
 ...
 
 ### CSV
