@@ -17,8 +17,28 @@ https://www.ionos.de/digitalguide/websites/web-entwicklung/was-ist-swagger/
 
 https://swagger.io/specification/v2/
 
+---
 
+### API Endpunkte
 
+All URIs are relative to *https://api.slhdirekt.de*
+
+Class | Method | HTTP request | Description
+------------ | ------------- | ------------- | -------------
+*AuthApi* | [**auth**](docs/AuthApi.md#auth) | **PUT** /auth | Authenticates the user.
+*OrderApi* | [**callList**](docs/OrderApi.md#callList) | **GET** /orders/ | Retrieves a list of orders.
+*OrderApi* | [**create**](docs/OrderApi.md#create) | **POST** /orders/create | Creates a new order.
+*OrderApi* | [**delete**](docs/OrderApi.md#delete) | **DELETE** /orders/{uuid} | Deletes an unpublished order.
+*OrderApi* | [**get**](docs/OrderApi.md#get) | **GET** /orders/{uuid} | Retrieves details of a specific order.
+*OrderApi* | [**label**](docs/OrderApi.md#label) | **GET** /orders/{uuid}/labels/{nve} | Retrieves a label for a specific order and NVE number as PDF file.
+*OrderApi* | [**labels**](docs/OrderApi.md#labels) | **GET** /orders/{uuid}/labels | Retrieves all labels for a specific order in a single PDF file.
+*OrderApi* | [**publish**](docs/OrderApi.md#publish) | **POST** /orders/{uuid}/publish | Publishes a specific order.
+*OrderApi* | [**publishOrders**](docs/OrderApi.md#publishOrders) | **POST** /orders/publish | Publishes multiple orders.
+*OrderApi* | [**put**](docs/OrderApi.md#put) | **PUT** /orders/{uuid} | Updates an existing order.
+*OrderApi* | [**status**](docs/OrderApi.md#status) | **GET** /orders/{uuid}/status | Retrieves the status of a specific order.
+*OrderApi* | [**upload**](docs/OrderApi.md#upload) | **POST** /orders/upload | Uploads an order file in a custom import format.
+
+---
 
 ### Authentifizierung
 
@@ -51,6 +71,7 @@ Auth Response:
 }
 ```
 
+---
 
 ## Datei Transfer
 
